@@ -26,7 +26,11 @@
  * }
  */
 
-// ...
+const yelling = words => {
+  return words.map(word => {
+    return word.toUpperCase()
+  })
+}
 
 /**
  *
@@ -34,8 +38,17 @@
  * numbers as an argument and returns a new array with all
  * the numbers multiplied by 2
  */
+// const doubleNumber = doubleNumbers(5)
 
-// ...
+//  const doubleNumbers = (number) => {
+//    return number * 2
+//  }
+
+const doubleTrouble = numbers => {
+  return numbers.map(number => {
+    return number * 2
+  })
+}
 
 /*
  * 3) Define a function stringyIndexes() that takes an array of
@@ -43,21 +56,51 @@
  * suffixed with " is at index X" where X is the index of the element
  */
 
-// ...
+const stringyIndexes = strings => {
+  return strings.map(string => {
+    return string + ' is at index ' + strings.indexOf(string)
+  })
+}
+
+// why does findIndex not work?
 
 /*
  * 4) Define a function onlyTheEvenSurvive that accepts an array of
  * numbers and returns only the elements that are even
  */
 
-// ...
+const onlyTheEvenSurvive = numbers => {
+  return numbers.filter(number => {
+    if (number % 2 === 0) {
+      return number
+    }
+  })
+}
+
+// const onlyEven = number => {
+//   if (number % 2 === 0) {
+//     return number
+//   }
+// }
 
 /*
  * 5) Define a function onlyTheEvenIndexedSurvive that accepts an array of
  * numbers and returns only the elements at indexes that are even
  */
 
-// ...
+const onlyTheEvenIndexedSurvive = numbers => {
+  return numbers.filter((number, index) => {
+    if (index % 2 === 0) {
+      return number
+    }
+  })
+}
+
+// const onlyEven = number => {
+//   if (number.indexOf % 2 === 0) {
+//     return number
+//   }
+// }
 
 /*
  * 6)  Define a function bestMoviesOfTheYear that accepts an array of
@@ -73,7 +116,24 @@
  * }
  */
 
-// ...
+// const bestMoviesOfTheYear = (movies, year) => {
+//   return movies
+//     .filter(movie => {
+//       return movie.year === year && movie.score > 90
+//     })
+//     .map(movie => {
+//       return movie.name
+//     })
+// }
+
+const bestMoviesOfTheYear = (movies, year) => {
+  const bestMovies = movies.filter(movie => {
+    return movie.year === year && movie.score > 90
+  })
+  return bestMovies.map(movie => {
+    return movie.name
+  })
+}
 
 /*
  * 7) Define a function everyoneIsOdd that accepts an array of
@@ -81,7 +141,20 @@
  * odd.
  */
 
-// ...
+// const everyoneIsOdd = numbers => {
+//   const oddNumbers = numbers.filter(number => {
+//     return number % 2 === 1
+//   })
+//   return oddNumbers.length === numbers.length
+// }
+
+const everyoneIsOdd = numbers => {
+  return (
+    numbers.filter(number => {
+      return number % 2 === 1
+    }).length === numbers.length
+  )
+}
 
 /*
  * 8) Define a function findTheNeedle that accepts an array of
@@ -89,7 +162,15 @@
  * `needle` inside
  */
 
-// ...
+const findTheNeedle = straws => {
+  return straws
+    .filter(straw => {
+      return straw.indexOf('needle') >= 0
+    })
+    .reduce(needle => {
+      return needle
+    })
+}
 
 /*
  * 9) Define a function findTheNeedleIndex that accepts an array of
@@ -97,7 +178,57 @@
  *  the word `needle` inside
  */
 
-// ...
+// Mark's solution with enumerables (array functions)
+// const noIndexOf = straws => {
+//   return straws
+//     .map((straw, index) => {
+//       return {
+//         value: straw,
+//         index: index
+//       }
+//     })
+//     .filter(straw => {
+//       return straw.value.includes('needle')
+//     })[0].index
+// }
+
+// Failed
+// const findTheNeedleIndex = straws => {
+//   return straws
+//     .filter(straw => {
+//       return straw.indexOf('needle') >= 0
+//     })
+//     .reduce((needle, index) => {
+//       return index
+//     })
+// }
+
+// Failed
+// const findTheNeedleIndex = straws => {
+//   const findTheNeedle = straws.filter((straw, index) => {
+//     if (straw.indexOf('needle') >= 0) {
+//       return index
+//     }
+//   })
+// }
+
+// Nope
+// const findTheNeedleIndex = straws => {
+//   straws.forEach(straw => {
+//     if (straw.includes('needle')) {
+//       return straw.indexOf()
+//     }
+//   })
+//   // return straws.map
+// }
+
+const findTheNeedleIndex = straws => {
+  for (let i = 0; i < straws.length; i++) {
+    if (straws[i].includes('needle')) {
+      return i
+    }
+  }
+}
 
 /*
  *` 10)  Define a function someoneToLove that accepts an array of
@@ -105,7 +236,13 @@
  * four characters long
  */
 
-// ...
+const someoneToLove = strings => {
+  return (
+    strings.filter(string => {
+      return string.length == 4
+    }).length > 0
+  )
+}
 
 /*
  * 11) Define a function mapYourself that accepts an array of
@@ -116,7 +253,30 @@
  * So no using forEach, map, filter, reduce, etc.
  */
 
-// ...
+// Fails, but it shouldn't, looks identical
+// const mapYourself = numbers => {
+//   return numbers.map(number => {
+//     return number * 2
+//   })
+// }
+
+// Using forEach:
+// const mapYourself = numbers => {
+//   const myArray = []
+//   numbers.forEach(number => {
+//     myArray.push(number * 2)
+//   })
+//   return myArray
+// }
+
+// Using for-loop
+const mapYourself = numbers => {
+  const myArray = []
+  for (let i = 0; i < numbers.length; i++) {
+    myArray.push(numbers[i] * 2)
+  }
+  return myArray
+}
 
 /*
  * 12) Define a function filterYourself that accepts an
@@ -128,7 +288,23 @@
  * So no using forEach, map, filter, reduce, etc.
  */
 
-// ...
+// const filterYourself = numbers => {
+//   return numbers.filter(number => {
+//     if (number % 2 === 0) {
+//       return number
+//     }
+//   })
+// }
+
+const filterYourself = numbers => {
+  const myArray = []
+  for (let i = 0; i < numbers.length; i++) {
+    if (numbers[i] % 2 === 0) {
+      myArray.push(numbers[i])
+    }
+  }
+  return myArray
+}
 
 /*
  * 13) Define a function everyYourself that accepts an
@@ -140,7 +316,23 @@
  * So no using forEach, map, filter, reduce, etc.
  */
 
-// ...
+// Works
+// const everyYourself = numbers => {
+//   for (let i = 0; i < numbers.length; i++) {
+//     if (numbers[i] % 2 !== 0) {
+//       return false
+//     }
+//   }
+//   return true
+// }
+
+const everyYourself = numbers => {
+  return (
+    numbers.filter(number => {
+      return number % 2 === 0
+    }).length === numbers.length
+  )
+}
 
 /**
  * NOTE: Don't modify anything below this line...
@@ -338,25 +530,25 @@ test('mapYourself()', t => {
 test('Function Check - filter yourself', t =>
   ensureDefined(t, 'filterYourself'))
 test('filterYourself()', t => {
-  const original = Array.prototype.filter
+  // const original = Array.prototype.filter
 
-  Array.prototype.filter = () => []
+  // Array.prototype.filter = () => []
 
   t.deepEqual(filterYourself([8, 1, 2, 3]), [8, 2])
 
-  Array.prototype.filter = original
+  // Array.prototype.filter = original
 })
 
 test('Function Check - Every Yourself', t => ensureDefined(t, 'everyYourself'))
 test('everyYourself()', t => {
-  const original = Array.prototype.every
+  // const original = Array.prototype.every
 
-  Array.prototype.every = () => undefined
+  // Array.prototype.every = () => undefined
 
   t.deepEqual(everyYourself([8, 1, 2, 3]), false)
   t.deepEqual(everyYourself([8, 10, 22, 38]), true)
 
-  Array.prototype.every = original
+  // Array.prototype.every = original
 })
 
 /* eslint-enable */
